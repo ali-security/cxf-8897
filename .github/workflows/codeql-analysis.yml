@@ -11,13 +11,11 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [3.5.x-fixes]
-  #schedule:
-    #- cron: '0 18 * * 5'
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     strategy:
       fail-fast: false

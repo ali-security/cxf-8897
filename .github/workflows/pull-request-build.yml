@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest] 
+        os: [windows-2022, ubuntu-22.04] 
     permissions:
       contents: read  
       pull-requests: read
@@ -26,10 +26,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Apache Maven (Windows)
-        if: ${{ matrix.os == 'windows-latest' }} 
+        if: ${{ matrix.os == 'windows-2022' }} 
         run: mvn -U clean install -fae -B -Peverything
       - name: Build with Apache Maven
-        if: ${{ matrix.os != 'windows-latest' }} 
+        if: ${{ matrix.os != 'windows-2022' }} 
         run: mvn -U clean install -Djava.awt.headless=true -fae -B -Peverything
     env: 
        MAVEN_OPTS: "-Xmx1024M"
