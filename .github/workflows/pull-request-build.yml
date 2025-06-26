@@ -1,8 +1,8 @@
 name: "Build and Test"
 
 on:
-  pull_request:
-    branches: ['3.5.x-fixes']
+  push:
+    branches: ['main']
 
 permissions:
   contents: read
@@ -27,9 +27,9 @@ jobs:
           cache: maven
       - name: Build with Apache Maven (Windows)
         if: ${{ matrix.os == 'windows-2022' }} 
-        run: mvn -U clean install -fae -B -Peverything
+        run: mvn -U clean install -fae -B -Peverything -X -e
       - name: Build with Apache Maven
         if: ${{ matrix.os != 'windows-2022' }} 
-        run: mvn -U clean install -Djava.awt.headless=true -fae -B -Peverything
+        run: mvn -U clean install -Djava.awt.headless=true -fae -B -Peverything -X -e
     env: 
        MAVEN_OPTS: "-Xmx1024M"

@@ -1,0 +1,25 @@
+name: "CI"
+on: [push]
+
+jobs:
+  ci:
+    name: "CI"
+    runs-on: ubuntu-22.04
+    container:
+      image: openjdk:8
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+            maven-version: 3.9.1
+      - name: "Build"
+        run: |
+          mvn clean package -pl core -am
+      - name: "Upload jars"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "jars"
+          path: "**/*.jar"
